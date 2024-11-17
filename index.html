@@ -241,29 +241,30 @@
     <section class="section bg-dark text-center">
         <div class="container">
             <div class="row text-center">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-6">
                     <div class="row ">
                         <div class="col-5 text-right text-light border-right py-3">
                             <div class="m-auto"><i class="ti-alarm-clock icon-xl"></i></div>
                         </div>
                         <div class="col-7 text-left py-3">
-                            <h1 class="text-danger font-weight-bold font40">500</h1>
-                            <p class="text-light mb-1">Hours Worked</p>
+                            <h4 class="text-danger font-weight-bold font40" id="experienceCounter">500</h4>
+                            <p class="text-light mb-1">Total Experience</p>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-6">
                     <div class="row">
                         <div class="col-5 text-right text-light border-right py-3">
                             <div class="m-auto"><i class="ti-layers-alt icon-xl"></i></div>
                         </div>
                         <div class="col-7 text-left py-3">
-                            <h1 class="text-danger font-weight-bold font40">50K</h1>
+                            <h1 class="text-danger font-weight-bold font40">27+</h1>
                             <p class="text-light mb-1">Project Finished</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <!-- <div class="col-md-6 col-lg-3">
                     <div class="row">
                         <div class="col-5 text-right text-light border-right py-3">
                             <div class="m-auto"><i class="ti-face-smile icon-xl"></i></div>
@@ -273,8 +274,8 @@
                             <p class="text-light mb-1">Happy Clients</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
+                </div> -->
+                <!-- <div class="col-md-6 col-lg-3">
                     <div class="row">
                         <div class="col-5 text-right text-light border-right py-3">
                             <div class="m-auto"><i class="ti-heart-broken icon-xl"></i></div>
@@ -285,7 +286,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -540,6 +541,49 @@
 
     <!-- Web js -->
     <script src="assets/js/web.js"></script>
+    
+
+    <!-- Add this script section before the closing body tag -->
+<script>
+    function calculateExperience() {
+        // Define work periods
+        const experiences = [
+            {
+                start: new Date('2018-10-01'),
+                end: new Date() // Present
+            }
+        ];
+    
+        // Calculate total experience in milliseconds
+        const totalMs = experiences.reduce((total, exp) => {
+            return total + (exp.end - exp.start);
+        }, 0);
+    
+    // Convert to years, months, and days
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    const millisecondsPerYear = millisecondsPerDay * 365.25; // Account for leap years
+    
+    const years = Math.floor(totalMs / millisecondsPerYear);
+    const remainingAfterYears = totalMs % millisecondsPerYear;
+    
+    const months = Math.floor(remainingAfterYears / (millisecondsPerYear / 12));
+    const remainingAfterMonths = remainingAfterYears % (millisecondsPerYear / 12);
+    
+    const days = Math.floor(remainingAfterMonths / millisecondsPerDay);
+
+    // Update the experience counter element
+    const experienceElement = document.getElementById('experienceCounter');
+    if (experienceElement) {
+        let experienceText = `${years} Year${years !== 1 ? 's' : ''} `;
+        experienceText += `${months} Month${months !== 1 ? 's' : ''} `;
+        experienceText += `${days} Day${days !== 1 ? 's' : ''}`;
+        experienceElement.textContent = experienceText;
+    }
+    }
+    
+    // Calculate experience when page loads
+    document.addEventListener('DOMContentLoaded', calculateExperience);
+    </script>
 
 </body>
 
